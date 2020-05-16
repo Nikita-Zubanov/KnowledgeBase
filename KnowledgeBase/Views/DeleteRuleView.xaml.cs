@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для DeleteRuleWindow.xaml
+    /// Логика взаимодействия для DeleteRuleView.xaml
     /// </summary>
-    public partial class DeleteRuleWindow : Window
+    public partial class DeleteRuleView : Window
     {
-        public DeleteRuleWindow()
+        public DeleteRuleView()
         {
             InitializeComponent();
         }

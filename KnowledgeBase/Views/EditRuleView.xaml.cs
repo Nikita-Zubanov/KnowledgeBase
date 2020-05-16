@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AddRuleWindow.xaml
+    /// Логика взаимодействия для EditRuleView.xaml
     /// </summary>
-    public partial class AddRuleWindow : Window
+    public partial class EditRuleView : Window
     {
-        public AddRuleWindow()
+        public EditRuleView()
         {
             InitializeComponent();
         }

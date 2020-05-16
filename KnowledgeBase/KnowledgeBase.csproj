@@ -55,19 +55,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\AddParameterWindow.xaml">
+    <Compile Include="ViewModel\DiagnosticViewModel.cs" />
+    <Compile Include="Views\DiagnosticView.xaml.cs">
+      <DependentUpon>DiagnosticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowDiagnoseView.xaml.cs">
+      <DependentUpon>HowDiagnoseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowEditKnowledgeBaseView.xaml.cs">
+      <DependentUpon>HowEditKnowledgeBaseView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AddRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddRuleWindow.xaml">
+    <Page Include="Views\DeleteRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DeleteRuleWindow.xaml">
+    <Page Include="Views\DiagnosticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditRuleWindow.xaml">
+    <Page Include="Views\EditRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,29 +85,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Views\AddParameterWindow.xaml.cs">
-      <DependentUpon>AddParameterWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddRuleWindow.xaml.cs">
-      <DependentUpon>AddRuleWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Command.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\DeleteRuleWindow.xaml.cs">
-      <DependentUpon>DeleteRuleWindow.xaml</DependentUpon>
+    <Compile Include="Views\AddRuleView.xaml.cs">
+      <DependentUpon>AddRuleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditRuleWindow.xaml.cs">
-      <DependentUpon>EditRuleWindow.xaml</DependentUpon>
+    <Compile Include="Views\DeleteRuleView.xaml.cs">
+      <DependentUpon>DeleteRuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditRuleView.xaml.cs">
+      <DependentUpon>EditRuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\HowDiagnoseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowEditKnowledgeBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parameter.cs" />
+    <Compile Include="Models\Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

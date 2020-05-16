@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnowledgeBase.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using KnowledgeBase.ViewModel;
-using KnowledgeBase.Views;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
-    public partial class MainWindow : Window
+    public partial class DiagnosticView : Window
     {
-        public MainWindow()
+        public DiagnosticView()
         {
-            DataContext = new MainViewModel();
+            DataContext = new DiagnosticViewModel();
         }
     }
 }

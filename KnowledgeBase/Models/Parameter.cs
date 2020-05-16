@@ -15,7 +15,7 @@ namespace KnowledgeBase
         private string normalizedValues;
         private string methodMeasurement;
         private string[] termSet;
-        public string value;
+        private string value;
 
         public string Designation
         {
@@ -85,6 +85,20 @@ namespace KnowledgeBase
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public static IList<Parameter> GetParameters()
+        {
+            return new List<Parameter>
+            {
+                new Parameter { Title = "Длительность провала напряжения", Unit = "сек." },
+                new Parameter { Title = "Коэффициент несимметрии напряжений по обратной последовательности", Unit = "%" },
+                new Parameter { Title = "Коэффициент n-ой гармонической составляющей напряжения", Unit = "%" },
+                new Parameter { Title = "Погодные условия" },
+                new Parameter { Title = "Напряжения по фазе С, UC", Unit = "В" },
+                new Parameter { Title = "Напряжения по фазе А, UA", Unit = "В" },
+                new Parameter { Title = "Напряжения по фазе В, UB", Unit = "В" },
+            };
         }
     }
 }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AddParameterWindow.xaml
+    /// Логика взаимодействия для HowDiagnoseView.xaml
     /// </summary>
-    public partial class AddParameterWindow : Window
+    public partial class HowDiagnoseView : Window
     {
-        public AddParameterWindow()
+        public HowDiagnoseView()
         {
             InitializeComponent();
         }

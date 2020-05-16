@@ -10,18 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using KnowledgeBase.ViewModel;
-using KnowledgeBase.Views;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для HowEditKnowledgeBaseView.xaml
+    /// </summary>
+    public partial class HowEditKnowledgeBaseView : Window
     {
-        public MainWindow()
+        public HowEditKnowledgeBaseView()
         {
-            DataContext = new MainViewModel();
+            InitializeComponent();
         }
     }
 }
