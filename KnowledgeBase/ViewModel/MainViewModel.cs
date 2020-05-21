@@ -1,4 +1,5 @@
 ﻿using KnowledgeBase.Views;
+using KnowledgeBaseLibrary.InputOutputVariables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +15,8 @@ namespace KnowledgeBase.ViewModel
 {
     class MainViewModel
     {
-        public IList<Parameter> Parameters { get; }
-        
+        public IList<IParameter> Parameters { get; }
+
         private Command diagnoseCommand;
         private Command routeCommand;
         public ICommand DiagnoseCommand
@@ -42,7 +43,7 @@ namespace KnowledgeBase.ViewModel
                 return routeCommand;
             }
         }
-        
+
 
         public MainViewModel()
         {
@@ -51,12 +52,14 @@ namespace KnowledgeBase.ViewModel
 
         private void Diagnose(object obj)
         {
-            new DiagnosticView().Show();
+            DiagnosticView diagnosticView = new DiagnosticView();
+            diagnosticView.DataContext = new DiagnosticViewModel(Parameters);
+            diagnosticView.Show();
         }
         private bool CanDiagnose(object obj)
         {
-            IList<Parameter> parameters = (IList<Parameter>)obj;
-            return parameters.All(p => !String.IsNullOrEmpty(p.Value));
+            IList<IParameter> parameters = (IList<IParameter>)obj;
+            return parameters.All(p => p.Value != null);
         }
 
         private void GoToView(object obj)

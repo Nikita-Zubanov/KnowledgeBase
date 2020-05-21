@@ -21,7 +21,7 @@ namespace KnowledgeBase.Views
     {
         public AddRuleView()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

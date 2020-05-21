@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="385" Width="600">
+        Title="MainWindow" Height="400" Width="600">
 
-    <Grid>
+    <Grid>  
         <Menu x:Name="MainMenu" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top">
             <MenuItem Header="Редактировать">
                 <MenuItem Command="{Binding RouteCommand}" CommandParameter="AddRuleView" Header="Добавить правило" />
@@ -26,7 +26,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Width="auto"/>
                         <TextBlock Text=":  " />
-                        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="100" />
+                        <TextBox Text="{Binding ValueString, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="100" />
                         <TextBlock Text=" " />
                         <TextBlock Text="{Binding Unit}" />
                     </StackPanel>

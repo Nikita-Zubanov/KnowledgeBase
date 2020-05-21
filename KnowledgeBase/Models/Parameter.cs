@@ -1,32 +1,23 @@
-﻿using System;
+﻿using KnowledgeBaseLibrary.FundamentalVariables;
+using KnowledgeBaseLibrary.InputOutputVariables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KnowledgeBase
 {
-    class Parameter : INotifyPropertyChanged
+    class Parameter : IParameter, INotifyPropertyChanged
     {
-        private string designation;
-        private string title;
-        private string unit;
-        private string normalizedValues;
-        private string methodMeasurement;
-        private string[] termSet;
-        private string value;
+        private FactorTitle title { get; set; }
+        private string description { get; set; }
+        private string valueString { get; set; } = "";
+        private string unit { get; set; }
 
-        public string Designation
-        {
-            get { return designation; }
-            set
-            {
-                designation = value;
-                OnPropertyChanged("Designation");
-            }
-        }
-        public string Title
+        public FactorTitle Title
         {
             get { return title; }
             set
@@ -35,70 +26,76 @@ namespace KnowledgeBase
                 OnPropertyChanged("Title");
             }
         }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+        public string ValueString
+        {
+            set
+            {
+                if (!valueString.Contains(",") && !valueString.Contains(".") ||
+                    value != "," && value != ".")
+                {
+                    if (value == "," || value == ".")
+                        valueString = $"0{value}";
+                    else
+                        valueString = value;
+                    OnPropertyChanged("ValueString");
+                }
+            }
+        }
+        public decimal? Value
+        {
+            get 
+            {
+                if (String.IsNullOrEmpty(valueString))
+                    return null;
+
+                valueString = valueString.Replace(',', '.');
+                return Decimal.Parse(valueString, new CultureInfo("en-GB")); 
+            }
+        }
         public string Unit
         {
             get { return unit; }
             set
             {
-                unit = value;
+                this.unit = value;
                 OnPropertyChanged("Unit");
             }
         }
-        public string NormalizedValues
-        {
-            get { return normalizedValues; }
-            set
-            {
-                normalizedValues = value;
-                OnPropertyChanged("NormalizedValues");
-            }
-        }
-        public string MethodMeasurement
-        {
-            get { return methodMeasurement; }
-            set
-            {
-                methodMeasurement = value;
-                OnPropertyChanged("MethodMeasurement");
-            }
-        }
-        public string[] TermSet
-        {
-            get { return termSet; }
-            set
-            {
-                termSet = value;
-                OnPropertyChanged("TermSet");
-            }
-        }
-        public string Value
-        {
-            get { return value; }
-            set
-            {
-                this.value = value;
-                OnPropertyChanged("Value");
-            }
-        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public static IList<Parameter> GetParameters()
+        public static IList<IParameter> GetParameters()
         {
-            return new List<Parameter>
+            return new List<IParameter>
             {
-                new Parameter { Title = "Длительность провала напряжения", Unit = "сек." },
-                new Parameter { Title = "Коэффициент несимметрии напряжений по обратной последовательности", Unit = "%" },
-                new Parameter { Title = "Коэффициент n-ой гармонической составляющей напряжения", Unit = "%" },
-                new Parameter { Title = "Погодные условия" },
-                new Parameter { Title = "Напряжения по фазе С, UC", Unit = "В" },
-                new Parameter { Title = "Напряжения по фазе А, UA", Unit = "В" },
-                new Parameter { Title = "Напряжения по фазе В, UB", Unit = "В" },
+                new Parameter { Title = FactorTitle.dt, Description = "Длительность провала напряжения", Unit = "сек." },
+                new Parameter { Title = FactorTitle.K2U, Description = "Коэффициент несимметрии напряжений по обратной последовательности", Unit = "%" },
+                new Parameter { Title = FactorTitle.KUn, Description = "Коэффициент n-ой гармонической составляющей напряжения", Unit = "%" },
+                new Parameter { Title = FactorTitle.Weather, Description = "Погодные условия" },
+                new Parameter { Title = FactorTitle.Ua, Description = "Напряжения по фазе А", Unit = "В" },
+                new Parameter { Title = FactorTitle.Ub, Description = "Напряжения по фазе В", Unit = "В" },
+                new Parameter { Title = FactorTitle.Uc, Description = "Напряжения по фазе С", Unit = "В" },
             };
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0} ({1}) = {2}{3}", Description, title.ToString(), valueString, unit);
         }
     }
 }

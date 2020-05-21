@@ -19,7 +19,7 @@ namespace KnowledgeBase.Views
     {
         public DiagnosticView()
         {
-            DataContext = new DiagnosticViewModel();
+
         }
     }
 }
