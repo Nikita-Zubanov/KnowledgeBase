@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для LogicalOutputView.xaml
+    /// Логика взаимодействия для ReasoningView.xaml
     /// </summary>
-    public partial class LogicalOutputView : Window
+    public partial class ReasoningView : Window
     {
-        public LogicalOutputView(LogicalOutputViewModel logicalOutputVM)
+        public ReasoningView(ReasoningViewModel reasoningVM)
         {
             InitializeComponent();
-            DataContext = logicalOutputVM;
+            DataContext = reasoningVM;
         }
     }
 }

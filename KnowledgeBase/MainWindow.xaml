@@ -24,7 +24,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Width="auto"/>
+                        <TextBlock Text="{Binding Description}" HorizontalAlignment="Left" Width="auto"/>
                         <TextBlock Text=":  " />
                         <TextBox Text="{Binding ValueString, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="100" />
                         <TextBlock Text=" " />

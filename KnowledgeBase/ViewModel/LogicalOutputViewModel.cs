@@ -13,30 +13,57 @@ namespace KnowledgeBase.ViewModel
 {
     public class LogicalOutputViewModel
     {
-        public IDictionary<int, IList<Judgment>> LogicalOutput { get; set; }
+        public IList<LinguisticVariable> InputLinguisticVariable { get; }
+        public IDictionary<int, IList<LinguisticVariable>> Reasoning { get; }
+        public LinguisticVariable Conclusion { get; }
+        public IList<LinguisticVariable> AdditionalJudgments { get; }
 
-        private Command diagnoseCommand;
-        public ICommand DiagnoseCommand
+        private Command showReasoningCommand;
+        private Command showDataAnalyticsCommand;
+        public ICommand ShowReasoningCommand
         {
             get
             {
-                if (diagnoseCommand == null)
+                if (showReasoningCommand == null)
                 {
-                    diagnoseCommand = new Command(this.Command);
+                    showReasoningCommand = new Command(ShowReasoning);
                 }
-                return diagnoseCommand;
+                return showReasoningCommand;
+            }
+        }
+        public ICommand ShowDataAnalyticsCommand
+        {
+            get
+            {
+                if (showDataAnalyticsCommand == null)
+                {
+                    showDataAnalyticsCommand = new Command(ShowDataAnalytics);
+                }
+                return showDataAnalyticsCommand;
             }
         }
 
         public LogicalOutputViewModel(IList<IParameter> parameters)
         {
             LogicalOutput logicalOutput = new LogicalConclusion(parameters).GetLogicalOutput();
-            LogicalOutput = logicalOutput.FactorsOutput;
+
+            InputLinguisticVariable = logicalOutput.InputLinguisticVariable;
+            Reasoning = logicalOutput.Reasoning;
+            Conclusion = logicalOutput.Conclusion;
+            AdditionalJudgments = logicalOutput.AdditionalLinguisticVariables;
         }
 
-        private void Command(object obj)
+        private void ShowReasoning(object obj)
         {
-
+            ReasoningViewModel reasoningVM = new ReasoningViewModel((IDictionary<int, IList<LinguisticVariable>>)obj);
+            ReasoningView reasoningV = new ReasoningView(reasoningVM);
+            reasoningV.Show();
+        }
+        private void ShowDataAnalytics(object obj)
+        {
+            DataAnalyticsViewModel dataAnalyticsVM = new DataAnalyticsViewModel((IList<LinguisticVariable>)obj);
+            DataAnalyticsView dataAnalyticsV = new DataAnalyticsView(dataAnalyticsVM);
+            dataAnalyticsV.Show();
         }
     }
 }

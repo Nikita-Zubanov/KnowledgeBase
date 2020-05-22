@@ -5,32 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="LogicalOutputView" Height="450" Width="800">
+        Title="LogicalOutputView" Height="400" Width="600">
     <Grid>
-        <StackPanel>
-            <ListBox ItemsSource="{Binding Path=LogicalOutput}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="2">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Path=Key}" />
-                                <ListView ItemsSource="{Binding Path=Value}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Title}" />
-                                                <TextBlock Text="—" />
-                                                <TextBlock Text="{Binding Path=FuzzyValue}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"></RowDefinition>
+            <RowDefinition Height="33*"></RowDefinition>
+            <RowDefinition Height="337*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Состояние оборудования:" Grid.Row="0" Margin="10,10,10,0"  />
+        <StackPanel DataContext="{Binding Path=Conclusion}" Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,0">
+            <TextBlock Text="{Binding Path=Description}" />
+            <TextBlock Text=" — " />
+            <TextBlock Text="{Binding Path=FuzzyValue}" />
         </StackPanel>
-        <Button Command="{Binding DiagnoseCommand}" CommandParameter="What" Content="Диагностировать" HorizontalAlignment="Right" Margin="0,0,10,10" Width="120" Height="20" VerticalAlignment="Bottom"/>
+
+        <StackPanel Grid.Row="2" Margin="10,0,10,0">
+            <TextBlock Text="Дополнительные данные:" />
+            <ListView ItemsSource="{Binding Path=AdditionalJudgments}" Height="172" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Description}" />
+                            <TextBlock Text="—" />
+                            <TextBlock Text="{Binding Path=FuzzyValue}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <Button Command="{Binding ShowReasoningCommand}" CommandParameter="{Binding Reasoning}" Grid.Row="2" Content="Показать рассуждение" HorizontalAlignment="Right" Margin="0,0,432,10" Width="150" Height="20" VerticalAlignment="Bottom" />
+        <Button Command="{Binding ShowDataAnalyticsCommand}" CommandParameter="{Binding InputLinguisticVariable}" Grid.Row="2" Content="Аналитика вх. данных" HorizontalAlignment="Right" Margin="-10,0,432,45" Width="150" Height="20" VerticalAlignment="Bottom" />
     </Grid>
 </Window>

@@ -86,7 +86,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\DataAnalyticsViewModel.cs" />
     <Compile Include="ViewModel\LogicalOutputViewModel.cs" />
+    <Compile Include="ViewModel\ReasoningViewModel.cs" />
+    <Compile Include="Views\DataAnalyticsView.xaml.cs">
+      <DependentUpon>DataAnalyticsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HowDiagnoseView.xaml.cs">
       <DependentUpon>HowDiagnoseView.xaml</DependentUpon>
     </Compile>
@@ -96,7 +101,14 @@
     <Compile Include="Views\LogicalOutputView.xaml.cs">
       <DependentUpon>LogicalOutputView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ReasoningView.xaml.cs">
+      <DependentUpon>ReasoningView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AddRuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataAnalyticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,6 +155,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ReasoningView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Parameter.cs" />
@@ -163,10 +179,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="json1 - Копировать.txt" />
-    <Resource Include="json1 - Копировать - Копировать.txt" />
-    <Resource Include="json1 - Копировать - Копировать - Копировать.txt" />
-    <Content Include="json1.txt" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
