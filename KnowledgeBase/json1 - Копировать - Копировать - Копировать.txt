@@ -1,13 +1,11 @@
 1. ************************************************************************
 { "OR": [ "Ua — Exceeding", "Ub — Exceeding", "Uc — Exceeding" ], "AND": [ "Weather — Unsuccessful" ] }
 "Uimp — Exceeding"
-"Uimp — NotExceeding" 
 
-{ "OR": [ "Ua — Maximum", "Ua — Nominal" ], "OR": ["Ub — Maximum", "Ub — Nominal" ], "OR": ["Uc — Maximum", "Uc — Nominal" ], "AND": [ "Uimp — NotExceeding" ], "AND": [ "Weather — Unsuccessful" ] }
+{ "OR": [ "Ua — Maximum", "Ub — Maximum", "Uc — Maximum" ], "OR": [ "Ua — Maximum", "Ua — Nominal" ], "OR": ["Ub — Maximum", "Ub — Nominal" ], "OR": ["Uc — Maximum", "Uc — Nominal" ], "AND": [ "Weather — Unsuccessful" ] }
 "Uimp — Maximum"
-"Uimp — NotMaximum"
 
-{ "AND": [ "Ua — Nominal" ], "AND": [ "Ub — Nominal" ], "AND": [ "Uc — Nominal" ], "AND": [ "Uimp — NotMaximum" ], "AND": [ "Weather — Unsuccessful" ] }
+{ "AND": [ "Ua — Nominal" ], "AND": [ "Ub — Nominal" ], "AND": [ "Uc — Nominal" ], "AND": [ "Weather — Unsuccessful" ] }
 "Uimp — Nominal"
 
 { "AND": [ "Weather — Successful" ] }
@@ -16,25 +14,21 @@
 2. ************************************************************************
 { "OR": [ "Ua — Exceeding", "Ub — Exceeding", "Uc — Exceeding" ] }
 "dUabc — Exceeding"
-"dUabc — NotExceeding" 
 
-{ "OR": [ "Ua — Maximum", "Ua — Nominal" ], "OR": ["Ub — Maximum", "Ub — Nominal" ], "OR": ["Uc — Maximum", "Uc — Nominal" ], "AND": [ "dUabc — NotExceeding" ] }
+{ "OR": [ "Ua — Maximum", "Ub — Maximum", "Uc — Maximum" ], "OR": [ "Ua — Maximum", "Ua — Nominal" ], "OR": ["Ub — Maximum", "Ub — Nominal" ], "OR": ["Uc — Maximum", "Uc — Nominal" ] }
 "dUabc — Maximum"
-"dUabc — NotMaximum"
 
-{ "AND": [ "Ua — Nominal" ], "AND": [ "Ub — Nominal" ], "AND": [ "Uc — Nominal" ], "AND": [ "dUabc — NotMaximum" ] }
+{ "AND": [ "Ua — Nominal" ], "AND": [ "Ub — Nominal" ], "AND": [ "Uc — Nominal" ] }
 "dUabc — Nominal"
 
 3. ************************************************************************
 { "OR": [ "Ua — Exceeding", "Ub — Exceeding", "Uc — Exceeding" ] }
 "KU — Exceeding"
-"KU — NotExceeding" 
 
-{ "OR": [ "Ua — Maximum", "Ua — Nominal" ], "OR": ["Ub — Maximum", "Ub — Nominal" ], "OR": ["Uc — Maximum", "Uc — Nominal" ], "AND": [ "KU — NotExceeding" ] }
+{ "OR": [ "Ua — Maximum", "Ub — Maximum", "Uc — Maximum" ], "OR": [ "Ua — Maximum", "Ua — Nominal" ], "OR": ["Ub — Maximum", "Ub — Nominal" ], "OR": ["Uc — Maximum", "Uc — Nominal" ] }
 "KU — Maximum"
-"KU — NotMaximum"
 
-{ "AND": [ "Ua — Nominal" ], "AND": [ "Ub — Nominal" ], "AND": [ "Uc — Nominal" ], "AND": [ "KU — NotMaximum" ] }
+{ "AND": [ "Ua — Nominal" ], "AND": [ "Ub — Nominal" ], "AND": [ "Uc — Nominal" ] }
 "KU — Nominal"
 
 4. ************************************************************************
@@ -47,25 +41,21 @@
 5. ************************************************************************
 { "OR": [ "KU — Exceeding", "KUn — Exceeding" ] }
 "Uns — Exceeding"
-"Uns — NotExceeding" 
 
-{ "OR": [ "KU — Maximum", "KU — Nominal" ], "OR": [ "KUn — Maximum", "KUn — Nominal" ], "AND": [ "Uns — NotExceeding" ] }
+{ "OR": [ "KU — Maximum", "KUn — Maximum" ], "OR": [ "KU — Maximum", "KU — Nominal" ], "OR": [ "KUn — Maximum", "KUn — Nominal" ] }
 "Uns — Maximum"
-"Uns — NotMaximum"
 
-{ "AND": [ "KU — Nominal" ], "AND": [ "KUn — Nominal" ], "AND": [ "Uns — NotMaximum" ] }
+{ "AND": [ "KU — Nominal" ], "AND": [ "KUn — Nominal" ] }
 "Uns — Nominal"
 
 6. ************************************************************************
 { "OR": [ "Uimp — Exceeding", "dUabc — Exceeding", "Uns — Exceeding", "KUn — Exceeding", "K2U — Exceeding" ], "OR": [ "K2Ui — Unsuccessful", "K2Ui — Successful" ], "OR": [ "dt — Unsuccessful", "dt — Successful" ] }
 "ServiceabilityEquipment — Exceeding"
-"ServiceabilityEquipment — NotExceeding" 
 
-{ "OR": [ "Uimp — Maximum", "Uimp — Nominal"], "OR": [ "dUabc — Maximum", "dUabc — Nominal"], "OR": [ "Uns — Maximum", "Uns — Nominal"], "OR": [ "KUn — Maximum", "KUn — Nominal"], "OR": [ "K2U — Maximum", "K2U — Nominal" ], "OR": [ "K2Ui — Unsuccessful", "K2Ui — Successful" ], "OR": [ "dt — Unsuccessful", "dt — Successful" ], "AND": [ "ServiceabilityEquipment — NotExceeding" ] }
+{ "OR": [ "Uimp — Maximum", "dUabc — Maximum", "Uns — Maximum", "KUn — Maximum", "K2U — Maximum" ], "OR": [ "Uimp — Maximum", "Uimp — Nominal" ], "OR": [ "dUabc — Maximum", "dUabc — Nominal" ], "OR": [ "Uns — Maximum", "Uns — Nominal" ], "OR": [ "KUn — Maximum", "KUn — Nominal" ], "OR": [ "K2U — Maximum", "K2U — Nominal" ], "OR": [ "K2Ui — Unsuccessful", "dt — Unsuccessful" ], "OR": [ "K2Ui — Unsuccessful", "K2Ui — Successful" ], "OR": [ "dt — Unsuccessful", "dt — Successful" ] }
 "ServiceabilityEquipment — Maximum"
-"ServiceabilityEquipment — NotMaximum" 
 
-{ "AND": [ "Uimp — Nominal" ], "AND": [ "dUabc — Nominal" ], "AND": [ "Uns — Nominal" ], "AND": [ "KUn — Nominal" ], "AND": [ "K2U — Nominal" ], "AND": [ "K2Ui — Successful" ], "AND": [ "dt — Successful" ], "AND": [ "ServiceabilityEquipment — NotMaximum" ] }
+{ "AND": [ "Uimp — Nominal" ], "AND": [ "dUabc — Nominal" ], "AND": [ "Uns — Nominal" ], "AND": [ "KUn — Nominal" ], "AND": [ "K2U — Nominal" ], "AND": [ "K2Ui — Successful" ], "AND": [ "dt — Successful" ] }
 "ServiceabilityEquipment — Nominal"
 
 

@@ -86,25 +86,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\DiagnosticViewModel.cs" />
-    <Compile Include="Views\DiagnosticView.xaml.cs">
-      <DependentUpon>DiagnosticView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModel\LogicalOutputViewModel.cs" />
     <Compile Include="Views\HowDiagnoseView.xaml.cs">
       <DependentUpon>HowDiagnoseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HowEditKnowledgeBaseView.xaml.cs">
       <DependentUpon>HowEditKnowledgeBaseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LogicalOutputView.xaml.cs">
+      <DependentUpon>LogicalOutputView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AddRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DeleteRuleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DiagnosticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,6 +139,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LogicalOutputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Parameter.cs" />
@@ -163,6 +163,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="json1 - Копировать.txt" />
+    <Resource Include="json1 - Копировать - Копировать.txt" />
+    <Resource Include="json1 - Копировать - Копировать - Копировать.txt" />
     <Content Include="json1.txt" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

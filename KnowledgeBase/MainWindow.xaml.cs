@@ -21,6 +21,7 @@ namespace KnowledgeBase
     {
         public MainWindow()
         {
+            InitializeComponent();
             DataContext = new MainViewModel();
         }
     }

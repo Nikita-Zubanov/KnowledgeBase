@@ -1,0 +1,36 @@
+﻿<Window x:Class="KnowledgeBase.Views.LogicalOutputView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnowledgeBase.Views"
+        mc:Ignorable="d"
+        Title="LogicalOutputView" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <ListBox ItemsSource="{Binding Path=LogicalOutput}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=Key}" />
+                                <ListView ItemsSource="{Binding Path=Value}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Title}" />
+                                                <TextBlock Text="—" />
+                                                <TextBlock Text="{Binding Path=FuzzyValue}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <Button Command="{Binding DiagnoseCommand}" CommandParameter="What" Content="Диагностировать" HorizontalAlignment="Right" Margin="0,0,10,10" Width="120" Height="20" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

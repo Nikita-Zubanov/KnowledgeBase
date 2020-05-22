@@ -52,9 +52,9 @@ namespace KnowledgeBase.ViewModel
 
         private void Diagnose(object obj)
         {
-            DiagnosticView diagnosticView = new DiagnosticView();
-            diagnosticView.DataContext = new DiagnosticViewModel(Parameters);
-            diagnosticView.Show();
+            LogicalOutputViewModel logicalOutputVM = new LogicalOutputViewModel((IList<IParameter>) obj);
+            LogicalOutputView logicalOutputV = new LogicalOutputView(logicalOutputVM);
+            logicalOutputV.Show();
         }
         private bool CanDiagnose(object obj)
         {

@@ -15,11 +15,15 @@ using System.Windows.Shapes;
 
 namespace KnowledgeBase.Views
 {
-    public partial class DiagnosticView : Window
+    /// <summary>
+    /// Логика взаимодействия для LogicalOutputView.xaml
+    /// </summary>
+    public partial class LogicalOutputView : Window
     {
-        public DiagnosticView()
+        public LogicalOutputView(LogicalOutputViewModel diagnosticVM)
         {
-
+            InitializeComponent();
+            DataContext = diagnosticVM;
         }
     }
 }
