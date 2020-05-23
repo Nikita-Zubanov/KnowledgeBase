@@ -47,7 +47,7 @@ namespace KnowledgeBase.ViewModel
 
         public MainViewModel()
         {
-            Parameters = Parameter.GetParameters();
+            Parameters = ParameterM.GetParameters();
         }
 
         private void Diagnose(object obj)

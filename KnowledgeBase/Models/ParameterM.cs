@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace KnowledgeBase
 {
-    class Parameter : IParameter, INotifyPropertyChanged
+    class ParameterM : IParameter, INotifyPropertyChanged
     {
-        private FactorTitle title { get; set; }
-        private string description { get; set; }
-        private string valueString { get; set; } = "";
-        private string unit { get; set; }
+        private FactorTitle title;
+        private string description;
+        private string valueString = "";
+        private string unit;
 
         public FactorTitle Title
         {
@@ -83,13 +83,13 @@ namespace KnowledgeBase
         {
             return new List<IParameter>
             {
-                new Parameter { Title = FactorTitle.dt, Description = "Длительность провала напряжения", Unit = "сек." },
-                new Parameter { Title = FactorTitle.K2U, Description = "Коэффициент несимметрии напряжений по обратной последовательности", Unit = "%" },
-                new Parameter { Title = FactorTitle.KUn, Description = "Коэффициент n-ой гармонической составляющей напряжения", Unit = "%" },
-                new Parameter { Title = FactorTitle.Weather, Description = "Погодные условия" },
-                new Parameter { Title = FactorTitle.Ua, Description = "Напряжения по фазе А", Unit = "В" },
-                new Parameter { Title = FactorTitle.Ub, Description = "Напряжения по фазе В", Unit = "В" },
-                new Parameter { Title = FactorTitle.Uc, Description = "Напряжения по фазе С", Unit = "В" },
+                new ParameterM { Title = FactorTitle.dt, Description = "Длительность провала напряжения", Unit = "сек." },
+                new ParameterM { Title = FactorTitle.K2U, Description = "Коэффициент несимметрии напряжений по обратной последовательности", Unit = "%" },
+                new ParameterM { Title = FactorTitle.KUn, Description = "Коэффициент n-ой гармонической составляющей напряжения", Unit = "%" },
+                new ParameterM { Title = FactorTitle.Weather, Description = "Погодные условия" },
+                new ParameterM { Title = FactorTitle.Ua, Description = "Напряжения по фазе А", Unit = "В" },
+                new ParameterM { Title = FactorTitle.Ub, Description = "Напряжения по фазе В", Unit = "В" },
+                new ParameterM { Title = FactorTitle.Uc, Description = "Напряжения по фазе С", Unit = "В" },
             };
         }
 

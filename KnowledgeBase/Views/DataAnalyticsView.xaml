@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="DataAnalyticsView" Height="450" Width="800">
+        Title="DataAnalyticsView" Height="450" Width="600">
     <Grid>
-        
+        <StackPanel Grid.Row="2" Margin="10,10,10,0">
+            <TextBlock Text="Показания входных данных:" />
+            <ListView ItemsSource="{Binding Path=InputLinguisticVariables}" Height="383" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Description}" />
+                            <Slider Width="400" x:Name="SliderParam1" Value="{Binding Path=ValueInPercent}" Margin="10,10,10,10" 
+                                    Maximum="100" 
+                                    Minimum="0"
+                                    IsSelectionRangeEnabled="True" 
+                                    SelectionStart="0" SelectionEnd="100" IsEnabled="False">
+                                <Slider.Resources>
+                                    <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" EndPoint="1,0.5" StartPoint="0,0.5">
+                                        <GradientStop Color="{Binding Path=Colors[5]}" Offset="{Binding Path=Offsets[5]}"/>
+                                        <GradientStop Color="{Binding Path=Colors[4]}" Offset="{Binding Path=Offsets[4]}"/>
+                                        <GradientStop Color="{Binding Path=Colors[3]}" Offset="{Binding Path=Offsets[3]}"/>
+                                        <GradientStop Color="{Binding Path=Colors[2]}" Offset="{Binding Path=Offsets[2]}"/>
+                                        <GradientStop Color="{Binding Path=Colors[1]}" Offset="{Binding Path=Offsets[1]}"/>
+                                    </LinearGradientBrush>
+                                </Slider.Resources>
+                            </Slider>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>

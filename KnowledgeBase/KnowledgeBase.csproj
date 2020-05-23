@@ -86,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AntecedentM.cs" />
+    <Compile Include="Models\ConsequentM.cs" />
+    <Compile Include="Models\JudgmentM.cs" />
+    <Compile Include="ViewModel\AddRuleViewModel.cs" />
     <Compile Include="ViewModel\DataAnalyticsViewModel.cs" />
     <Compile Include="ViewModel\LogicalOutputViewModel.cs" />
     <Compile Include="ViewModel\ReasoningViewModel.cs" />
@@ -161,7 +165,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\ParameterM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

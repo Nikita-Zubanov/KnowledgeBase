@@ -13,10 +13,11 @@ namespace KnowledgeBase.ViewModel
 {
     public class LogicalOutputViewModel
     {
-        public IList<LinguisticVariable> InputLinguisticVariable { get; }
-        public IDictionary<int, IList<LinguisticVariable>> Reasoning { get; }
-        public LinguisticVariable Conclusion { get; }
-        public IList<LinguisticVariable> AdditionalJudgments { get; }
+        public IList<ILinguisticVariable> InputLinguisticVariable { get; }
+        public IDictionary<int, IList<ILinguisticVariable>> Reasoning { get; }
+
+        public ILinguisticVariable Conclusion { get; }
+        public IList<ILinguisticVariable> AdditionalJudgments { get; }
 
         private Command showReasoningCommand;
         private Command showDataAnalyticsCommand;
@@ -55,13 +56,13 @@ namespace KnowledgeBase.ViewModel
 
         private void ShowReasoning(object obj)
         {
-            ReasoningViewModel reasoningVM = new ReasoningViewModel((IDictionary<int, IList<LinguisticVariable>>)obj);
+            ReasoningViewModel reasoningVM = new ReasoningViewModel(InputLinguisticVariable, Reasoning);
             ReasoningView reasoningV = new ReasoningView(reasoningVM);
             reasoningV.Show();
         }
         private void ShowDataAnalytics(object obj)
         {
-            DataAnalyticsViewModel dataAnalyticsVM = new DataAnalyticsViewModel((IList<LinguisticVariable>)obj);
+            DataAnalyticsViewModel dataAnalyticsVM = new DataAnalyticsViewModel(InputLinguisticVariable);
             DataAnalyticsView dataAnalyticsV = new DataAnalyticsView(dataAnalyticsVM);
             dataAnalyticsV.Show();
         }

@@ -26,14 +26,14 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=Description}" />
-                            <TextBlock Text="—" />
+                            <TextBlock Text=" — " />
                             <TextBlock Text="{Binding Path=FuzzyValue}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <Button Command="{Binding ShowReasoningCommand}" CommandParameter="{Binding Reasoning}" Grid.Row="2" Content="Показать рассуждение" HorizontalAlignment="Right" Margin="0,0,432,10" Width="150" Height="20" VerticalAlignment="Bottom" />
-        <Button Command="{Binding ShowDataAnalyticsCommand}" CommandParameter="{Binding InputLinguisticVariable}" Grid.Row="2" Content="Аналитика вх. данных" HorizontalAlignment="Right" Margin="-10,0,432,45" Width="150" Height="20" VerticalAlignment="Bottom" />
+        <Button Command="{Binding ShowReasoningCommand}" Grid.Row="2" Content="Показать рассуждение" HorizontalAlignment="Right" Margin="0,0,432,10" Width="150" Height="20" VerticalAlignment="Bottom" />
+        <Button Command="{Binding ShowDataAnalyticsCommand}" Grid.Row="2" Content="Аналитика вх. данных" HorizontalAlignment="Right" Margin="-10,0,432,45" Width="150" Height="20" VerticalAlignment="Bottom" />
     </Grid>
 </Window>

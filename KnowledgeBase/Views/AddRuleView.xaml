@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="AddRuleView" Height="450" Width="800">
+        Title="AddRuleView" Height="450" Width="600">
     <Grid>
+        <Label Content="ЕСЛИ" Margin="10,10,0,0" HorizontalAlignment="Left" Width="50" Height="26" VerticalAlignment="Top"/>
+        <ListView ItemsSource="{Binding AntecedentM.Judgments, Mode=TwoWay}" Margin="10,36,10,72">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding InitialBracket}" Margin="0,0,5,0" MinWidth="5"/>
+                            <TextBox Text="{Binding Title}" MinWidth="100" Width="auto"/>
+                            <TextBlock Text=" — " />
+                            <TextBox Text="{Binding FuzzyValue, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Width="auto" />
+                            <TextBox Text="{Binding EndBracket}" Margin="5,0,0,0" MinWidth="5"/>
+                        </StackPanel>
+                        <TextBox Text="{Binding Connection, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,5,0,5" Width="30" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         
+        <Label Content="ТО" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="50"/>
+        <StackPanel Orientation="Horizontal" Margin="10,388,100,10">
+            <TextBox Text="{Binding ConsequentM.Title}" MinWidth="100" Width="auto" Height="18" VerticalAlignment="Bottom"/>
+            <TextBlock Text=" — " Height="18" VerticalAlignment="Bottom" />
+            <TextBox Text="{Binding ConsequentM.FuzzyValue}" MinWidth="100" Width="auto" Height="18" VerticalAlignment="Bottom" />
+        </StackPanel>
+        
+        <Button Command="{Binding AddRuleCommand}" Content="Добавить" Margin="0,0,10,10" RenderTransformOrigin="0.493,-0.6" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

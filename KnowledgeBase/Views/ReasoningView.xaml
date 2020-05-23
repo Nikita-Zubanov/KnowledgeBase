@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="ReasoningView" Height="450" Width="800">
+        Title="ReasoningView" Height="450" Width="600">
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="101*"></RowDefinition>
+            <RowDefinition Height="318*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10,0,10,0">
+            <TextBlock Text="Входные данные:" />
+            <ListView ItemsSource="{Binding Path=InputLinguisticVariable}" Height="172" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Description}" />
+                            <TextBlock Text=" — " />
+                            <TextBlock Text="{Binding Path=FuzzyValue}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="10,0,10,0">
             <ListBox ItemsSource="{Binding Path=Reasoning}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -21,8 +39,8 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Title}" />
-                                                <TextBlock Text="—" />
+                                                <TextBlock Text="{Binding Path=Description}" />
+                                                <TextBlock Text=" — " />
                                                 <TextBlock Text="{Binding Path=FuzzyValue}" />
                                             </StackPanel>
                                         </DataTemplate>

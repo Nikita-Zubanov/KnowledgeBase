@@ -1,4 +1,5 @@
 ﻿using KnowledgeBaseLibrary.FundamentalVariables;
+using KnowledgeBaseLibrary.InputOutputVariables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace KnowledgeBase.ViewModel
 {
     public class ReasoningViewModel
     {
-        public IDictionary<int, IList<LinguisticVariable>> Reasoning { get; }
+        public IList<ILinguisticVariable> InputLinguisticVariable { get; }
+        public IDictionary<int, IList<ILinguisticVariable>> Reasoning { get; }
 
-        public ReasoningViewModel(IDictionary<int, IList<LinguisticVariable>> reasoning)
+        public ReasoningViewModel(IList<ILinguisticVariable> inputLinguistics, IDictionary<int, IList<ILinguisticVariable>> reasoning)
         {
+            InputLinguisticVariable = inputLinguistics;
             Reasoning = reasoning;
         }
     }
