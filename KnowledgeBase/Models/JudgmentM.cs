@@ -1,6 +1,8 @@
-﻿using KnowledgeBaseLibrary.FundamentalVariables;
+﻿using KnowledgeBaseLibrary;
+using KnowledgeBaseLibrary.FundamentalVariables;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,74 +12,73 @@ namespace KnowledgeBase.Models
 {
     public class JudgmentM : INotifyPropertyChanged
     {
-        private string title;
-        private string fuzzyValue;
-        private string connection;
-        private string initialBracket;
-        private string endBracket;
+        private Action AddNewJudgmentFromAntecedent;
 
-        public string Title
+        private FactorTitle? selectedTitle;
+        private FactorFuzzyValue? selectedFuzzyValue;
+        private LogicalConnection? selectedConnection;
+
+        public FactorTitle? SelectedTitle
         {
-            get { return title; }
-            set
-            {
-                title = value;
-                OnPropertyChanged("Title");
-            }
+            get { return selectedTitle; }
+            set { selectedTitle = value; OnPropertyChanged("SelectedTitle"); }
         }
-        public string FuzzyValue
+        public FactorFuzzyValue? SelectedFuzzyValue
         {
-            get { return fuzzyValue; }
-            set
-            {
-                fuzzyValue = value;
-                OnPropertyChanged("FuzzyValue");
-            }
+            get { return selectedFuzzyValue; }
+            set { selectedFuzzyValue = value; OnPropertyChanged("SelectedFuzzyValue"); }
         }
-        public string Connection
+        public LogicalConnection? SelectedConnection
         {
-            get { return connection; }
-            set
-            {
-                connection = value;
-                OnPropertyChanged("Connection");
-            }
-        }
-        public string InitialBracket
-        {
-            get { return initialBracket; }
-            set
-            {
-                initialBracket = value;
-                OnPropertyChanged("InitialBracket");
-            }
-        }
-        public string EndBracket
-        {
-            get { return endBracket; }
-            set
-            {
-                endBracket = value;
-                OnPropertyChanged("EndBracket");
-            }
+            get { return selectedConnection; }
+            set { selectedConnection = value; OnPropertyChanged("SelectedConnection"); }
         }
 
-        Action Add;
+        public ObservableCollection<FactorTitle> Titles { get; set; } = new ObservableCollection<FactorTitle>();
+        public ObservableCollection<FactorFuzzyValue> FuzzyValues { get; set; } = new ObservableCollection<FactorFuzzyValue>();
+        public ObservableCollection<LogicalConnection> Connections { get; set; } = new ObservableCollection<LogicalConnection>();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-        public JudgmentM(string title, string fuzzyValue, string connection, Action action)
+        public JudgmentM(
+            IList<ILinguisticVariable> linguistics,
+            IList<FactorFuzzyValue> termSets,
+            Action action)
         {
-            this.title = title;
-            this.fuzzyValue = fuzzyValue;
-            this.connection = connection;
-            Add = action;
+            SetObservableCollections(linguistics, termSets);
+            AddNewJudgmentFromAntecedent = action;
+        }
+
+        public JudgmentM(
+            IList<ILinguisticVariable> linguistics,
+            IList<FactorFuzzyValue> termSets,
+            FactorTitle title,
+            FactorFuzzyValue fuzzyValue,
+            LogicalConnection connection
+            ) : this(linguistics, termSets, null)
+        {
+            SelectedTitle = title;
+            SelectedFuzzyValue = fuzzyValue;
+            SelectedConnection = connection;
+        }
+
+        private void SetObservableCollections(
+            IList<ILinguisticVariable> linguistics,
+            IList<FactorFuzzyValue> termSets)
+        {
+            foreach (ILinguisticVariable linguistic in linguistics)
+                Titles.Add(linguistic.Title);
+
+            foreach (FactorFuzzyValue term in termSets)
+                FuzzyValues.Add(term);
+
+            Connections.Add(LogicalConnection.AND);
+            Connections.Add(LogicalConnection.OR);
         }
 
         public void OnPropertyChanged(string propertyName)
         {
-            if (Add != null)
-                    Add.Invoke();
+            AddNewJudgmentFromAntecedent?.Invoke();
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

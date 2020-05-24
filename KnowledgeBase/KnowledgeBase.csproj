@@ -89,12 +89,23 @@
     <Compile Include="Models\AntecedentM.cs" />
     <Compile Include="Models\ConsequentM.cs" />
     <Compile Include="Models\JudgmentM.cs" />
+    <Compile Include="Models\RuleM.cs" />
     <Compile Include="ViewModel\AddRuleViewModel.cs" />
     <Compile Include="ViewModel\DataAnalyticsViewModel.cs" />
+    <Compile Include="ViewModel\EditRuleViewModel.cs" />
     <Compile Include="ViewModel\LogicalOutputViewModel.cs" />
     <Compile Include="ViewModel\ReasoningViewModel.cs" />
     <Compile Include="Views\DataAnalyticsView.xaml.cs">
       <DependentUpon>DataAnalyticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GlobalDBConnectionBaseView.xaml.cs">
+      <DependentUpon>GlobalDBConnectionBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowAddRuleToKnowledgeBaseView.xaml.cs">
+      <DependentUpon>HowAddRuleToKnowledgeBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowConnectToDatabase.xaml.cs">
+      <DependentUpon>HowConnectToDatabase.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HowDiagnoseView.xaml.cs">
       <DependentUpon>HowDiagnoseView.xaml</DependentUpon>
@@ -116,10 +127,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DeleteRuleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\EditRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,9 +144,6 @@
     <Compile Include="Views\AddRuleView.xaml.cs">
       <DependentUpon>AddRuleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DeleteRuleView.xaml.cs">
-      <DependentUpon>DeleteRuleView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\EditRuleView.xaml.cs">
       <DependentUpon>EditRuleView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +151,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\GlobalDBConnectionBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowAddRuleToKnowledgeBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowConnectToDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HowDiagnoseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

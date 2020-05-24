@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="EditRuleView" Height="450" Width="800">
+        Title="Изменение правил в базы знаний" Height="450" Width="600">
     <Grid>
-        
+        <ComboBox ItemsSource="{Binding Rules}" SelectedItem="{Binding  SelectedRule}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="572"/>
+        <Label Content="ЕСЛИ" Margin="10,37,0,0" HorizontalAlignment="Left" Width="50" Height="26" VerticalAlignment="Top" RenderTransformOrigin="0.432,1.408"/>
+        <ListView ItemsSource="{Binding AntecedentM.Judgments, Mode=TwoWay}" Margin="10,63,10,67">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox ItemsSource="{Binding Titles, Mode=TwoWay}" SelectedItem="{Binding SelectedTitle}" MinWidth="80" Width="auto" />
+                            <TextBlock Text=" — " />
+                            <ComboBox ItemsSource="{Binding FuzzyValues, Mode=TwoWay}" SelectedItem="{Binding SelectedFuzzyValue}" MinWidth="60" Width="auto" />
+                        </StackPanel>
+                        <ComboBox ItemsSource="{Binding Connections, Mode=TwoWay}" SelectedItem="{Binding SelectedConnection}" MinWidth="30" Margin="10,10,0,10" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Content="ТО" HorizontalAlignment="Left" Margin="10,0,0,41" VerticalAlignment="Bottom" Width="50"/>
+        <StackPanel Orientation="Horizontal" Width="auto" Margin="10,0,100,10" Height="31" VerticalAlignment="Bottom">
+            <ComboBox ItemsSource="{Binding ConsequentM.Titles}" SelectedItem="{Binding ConsequentM.SelectedTitle}" MinWidth="80" Width="auto" Height="23" />
+            <TextBlock Text=" — " Margin="0,4" />
+            <ComboBox ItemsSource="{Binding ConsequentM.FuzzyValues}" SelectedItem="{Binding ConsequentM.SelectedFuzzyValue}" MinWidth="60" Width="auto" Height="23" />
+        </StackPanel>
+
+        <Button Command="{Binding DeleteRuleCommand}" Content="Удалить" Margin="0,0,10,10" RenderTransformOrigin="0.493,-0.6" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button Command="{Binding UpdateRuleCommand}" Content="Изменить" Margin="0,0,100,10" RenderTransformOrigin="0.493,-0.6" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

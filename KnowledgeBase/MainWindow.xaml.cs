@@ -23,8 +23,6 @@ namespace KnowledgeBase
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-
-            new AddRuleView().Show();
         }
     }
 }

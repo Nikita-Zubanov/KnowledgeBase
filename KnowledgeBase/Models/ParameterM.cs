@@ -43,9 +43,12 @@ namespace KnowledgeBase
                     value != "," && value != ".")
                 {
                     if (value == "," || value == ".")
-                        valueString = $"0{value}";
+                        valueString = $"0.";
                     else
-                        valueString = value;
+                    {
+                        int a = Convert.ToInt32(value);
+                        valueString = a.ToString();
+                    }
                     OnPropertyChanged("ValueString");
                 }
             }
@@ -56,6 +59,7 @@ namespace KnowledgeBase
             {
                 if (String.IsNullOrEmpty(valueString))
                     return null;
+
 
                 valueString = valueString.Replace(',', '.');
                 return Decimal.Parse(valueString, new CultureInfo("en-GB")); 

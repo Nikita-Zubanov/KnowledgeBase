@@ -1,16 +1,20 @@
 ﻿using KnowledgeBase.Models;
-using System;
+using KnowledgeBase.Views;
+using KnowledgeBaseLibrary;
+using KnowledgeBaseLibrary.FundamentalVariables;
+using KnowledgeBaseLibrary.RuleVariables;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace KnowledgeBase.ViewModel
 {
-    class AddRuleViewModel: INotifyPropertyChanged
+    class AddRuleViewModel
     {
+        private IList<ILinguisticVariable> linguistics;
+        private IList<FactorFuzzyValue> termSets;
+
         public AntecedentM AntecedentM { get; set; }
         public ConsequentM ConsequentM { get; set; }
 
@@ -29,21 +33,44 @@ namespace KnowledgeBase.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public AddRuleViewModel()
+        public AddRuleViewModel()       
         {
-            AntecedentM = new AntecedentM();
-            ConsequentM = new ConsequentM();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            using (DBManager db = new DBManager(DBManager.ConnectionString))
+            {
+                linguistics = db.GetLinguisticVariables();
+                termSets = db.GetTermSets();
+            }
+
+            AntecedentM = new AntecedentM(linguistics, termSets);
+            AntecedentM.Initialize();
+            ConsequentM = new ConsequentM(linguistics, termSets);
         }
 
         private void AddRule(object obj)
         {
+            LinguisticVariable linguistic = (LinguisticVariable) linguistics.Where(lv => lv.Title == ConsequentM.SelectedTitle).First();
+            Antecedent antecedent = AntecedentM.Make();
+            Judgment consequent = ConsequentM.Make();
 
+            Rule newRule = new SimpleRule(linguistic, antecedent, consequent);
+            SaveToDB(newRule);
         }
         private bool CanAddRule(object obj)
         {
-            return true;
+            return AntecedentM.IsVerified() && ConsequentM.IsVerified();
+        }
+
+        private void SaveToDB(Rule rule)
+        {
+            using (DBManager db = new DBManager(DBManager.ConnectionString))
+            {
+                db.InsertRule(rule);
+            }
         }
     }
 }

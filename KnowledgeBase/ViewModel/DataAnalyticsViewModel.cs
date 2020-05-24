@@ -46,6 +46,7 @@ namespace KnowledgeBase.ViewModel
         }
 
         public Dictionary<int, string> Colors { get; set; } = new Dictionary<int, string>();
+        public Dictionary<int, string> Values { get; set; } = new Dictionary<int, string>();
         public Dictionary<int, decimal> Offsets { get; set; } = new Dictionary<int, decimal>();
         public string Red { get; set; } = "Red";
         public LinguisticVariableForView(
@@ -77,15 +78,19 @@ namespace KnowledgeBase.ViewModel
                     Colors[4] = "Orange";
                     Colors[5] = "Red";
 
-                    decimal min = 0;
-                    decimal max = 1;
-                    min = ValueRanges[FactorFuzzyValue.Maximum][0];
-                    max = ValueRanges[FactorFuzzyValue.Maximum][1];
+                    Values[1] = valueRanges[FactorFuzzyValue.Nominal][0].ToString();
+                    Values[2] = "";
+                    Values[3] = valueRanges[FactorFuzzyValue.Nominal][1].ToString();
+                    Values[4] = "";
+                    Values[5] = valueRanges[FactorFuzzyValue.Maximum][1].ToString();
+
+                    decimal min = ValueRanges[FactorFuzzyValue.Maximum][0];
+                    decimal max = ValueRanges[FactorFuzzyValue.Maximum][1];
                     decimal endNominal = ValueRanges[FactorFuzzyValue.Nominal][1];
-                    decimal a1 = (endNominal - min) / (max - min);
+                    decimal middleRange = (endNominal - min) / (max - min);
                     Offsets[1] = 0;
                     Offsets[2] = 0;
-                    Offsets[3] = a1;
+                    Offsets[3] = middleRange;
                     Offsets[4] = 0.85m;
                     Offsets[5] = 1;
 
@@ -98,18 +103,22 @@ namespace KnowledgeBase.ViewModel
                     Colors[4] = "Yellow";
                     Colors[5] = "Red";
 
-                    decimal min = 0;
-                    decimal max = 1;
-                    min = ValueRanges[FactorFuzzyValue.Maximum][0];
-                    max = ValueRanges[FactorFuzzyValue.Maximum][1];
+                    Values[1] = valueRanges[FactorFuzzyValue.Maximum][0].ToString();
+                    Values[2] = valueRanges[FactorFuzzyValue.Nominal][0].ToString();
+                    Values[3] = "";
+                    Values[4] = valueRanges[FactorFuzzyValue.Nominal][1].ToString();
+                    Values[5] = valueRanges[FactorFuzzyValue.Maximum][1].ToString();
+
+                    decimal min = ValueRanges[FactorFuzzyValue.Maximum][0];
+                    decimal max = ValueRanges[FactorFuzzyValue.Maximum][1];
                     decimal startNominal = ValueRanges[FactorFuzzyValue.Nominal][0];
                     decimal endNominal = ValueRanges[FactorFuzzyValue.Nominal][1];
-                    decimal a1 = (startNominal - min) / (max - min);
-                    decimal a2 = (endNominal - min) / (max - min);
+                    decimal startMiddle = (startNominal - min) / (max - min);
+                    decimal endMiddle = (endNominal - min) / (max - min);
                     Offsets[1] = 0;
-                    Offsets[2] = a1;
+                    Offsets[2] = startMiddle;
                     Offsets[3] = 0.5m;
-                    Offsets[4] = a2;
+                    Offsets[4] = endMiddle;
                     Offsets[5] = 1;
                 }
             }
@@ -121,6 +130,12 @@ namespace KnowledgeBase.ViewModel
                 Colors[3] = "Yellow";
                 Colors[4] = "Orange";
                 Colors[5] = "Red";
+
+                Values[1] = valueRanges[FactorFuzzyValue.Successful][0].ToString();
+                Values[2] = "";
+                Values[3] = "";
+                Values[4] = "";
+                Values[5] = valueRanges[FactorFuzzyValue.Successful][1].ToString();
 
                 Offsets[1] = 0;
                 Offsets[2] = 0.25m;
@@ -135,6 +150,12 @@ namespace KnowledgeBase.ViewModel
                 Colors[3] = "Red";
                 Colors[4] = "Red";
                 Colors[5] = "Red";
+
+                Values[1] = "Есть";
+                Values[2] = "";
+                Values[3] = "";
+                Values[4] = "";
+                Values[5] = "Нет";
 
                 Offsets[1] = 0;
                 Offsets[2] = 0.25m;

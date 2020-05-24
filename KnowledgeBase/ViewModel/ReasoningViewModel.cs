@@ -11,12 +11,13 @@ namespace KnowledgeBase.ViewModel
     public class ReasoningViewModel
     {
         public IList<ILinguisticVariable> InputLinguisticVariable { get; }
-        public IDictionary<int, IList<ILinguisticVariable>> Reasoning { get; }
+        public IDictionary<int, IList<ILinguisticVariable>> Reasoning { get; } = new Dictionary<int, IList<ILinguisticVariable>>();
 
         public ReasoningViewModel(IList<ILinguisticVariable> inputLinguistics, IDictionary<int, IList<ILinguisticVariable>> reasoning)
         {
             InputLinguisticVariable = inputLinguistics;
-            Reasoning = reasoning;
+            foreach (var pair in reasoning)
+                Reasoning.Add(pair.Key + 1, pair.Value);
         }
     }
 }

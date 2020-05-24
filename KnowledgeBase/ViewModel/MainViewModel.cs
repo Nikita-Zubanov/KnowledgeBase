@@ -1,4 +1,5 @@
 ﻿using KnowledgeBase.Views;
+using KnowledgeBaseLibrary.FundamentalVariables;
 using KnowledgeBaseLibrary.InputOutputVariables;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,10 @@ namespace KnowledgeBase.ViewModel
         private bool CanDiagnose(object obj)
         {
             IList<IParameter> parameters = (IList<IParameter>)obj;
-            return parameters.All(p => p.Value != null);
+            return parameters.All(p => p.Value != null) &&
+                parameters.Where(p => p.Title == FactorTitle.Weather)
+                .First()
+                .Value < 2;
         }
 
         private void GoToView(object obj)
