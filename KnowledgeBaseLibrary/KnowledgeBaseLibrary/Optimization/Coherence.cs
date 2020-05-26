@@ -7,12 +7,12 @@ namespace KnowledgeBaseLibrary.Optimization
 {
     internal class Coherence : IVerification, ITransformer
     {
-        public void Transform(ref IList<KB.Rule> rules)
+        public void Transform(ref IList<Rule> rules)
         {
             this.RemoveDuplicates(rules);
         }
 
-        public bool IsVerified(IList<KB.Rule> rules)
+        public bool IsVerified(IList<Rule> rules)
         {
             if (rules != null)
             {
@@ -25,22 +25,22 @@ namespace KnowledgeBaseLibrary.Optimization
                 throw new NullReferenceException();
         }
 
-        private void RemoveDuplicates(IList<KB.Rule> rules)
+        private void RemoveDuplicates(IList<Rule> rules)
         {
             for (Int32 index = 0; index < rules.Count - 1; index++)
             {
-                KB.Rule currentRule = rules[index];
-                KB.Rule nextRule = rules[index + 1];
+                Rule currentRule = rules[index];
+                Rule nextRule = rules[index + 1];
 
                 if (currentRule.Equals(nextRule))
                     rules.Remove(nextRule);
             }
         }
 
-        private bool IsConsequentsNotContradictions(IList<KB.Rule> rules)
+        private bool IsConsequentsNotContradictions(IList<Rule> rules)
         {
-            foreach (KB.Rule currentRule in rules)
-                foreach (KB.Rule rule in rules)
+            foreach (Rule currentRule in rules)
+                foreach (Rule rule in rules)
                     if (currentRule.Antecedent.Equals(rule.Antecedent) &&
                         !currentRule.Consequent.Equals(rule.Consequent))
                         return false;

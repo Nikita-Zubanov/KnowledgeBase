@@ -53,9 +53,9 @@ namespace KnowledgeBaseLibrary.Modules
 
             return logicalOutput;
         }
-        private void FillRulesAndFactorsLogicalOutput(WorkingMemory workingMemory, IList<KB.Rule> ruleTree)
+        private void FillRulesAndFactorsLogicalOutput(WorkingMemory workingMemory, IList<Rule> ruleTree)
         {
-            foreach (KB.Rule rule in ruleTree)
+            foreach (Rule rule in ruleTree)
             {
                 if (!logicalOutput.HaveConsequent(rule) &&
                     rule.IsAllowConsequent(workingMemory.Factors))
@@ -68,7 +68,7 @@ namespace KnowledgeBaseLibrary.Modules
                 FillRulesAndFactorsLogicalOutput(workingMemory, rule.GetChildRules());
             }
         }
-        private bool IfIsTopRuleAddToWorkingMemory(KB.Rule rule)
+        private bool IfIsTopRuleAddToWorkingMemory(Rule rule)
         {
             IList<Judgment> topRuleConsequences = ruleBase.GetTopRuleConsequences();
 
@@ -93,7 +93,7 @@ namespace KnowledgeBaseLibrary.Modules
         private IList<ILinguisticVariable> GetLinguisticVarsBy(IList<IParameter> parameters)
         {
             IList<ILinguisticVariable> linguisticVars = new List<ILinguisticVariable>();
-            using (DBManager db = new DBManager())
+            using (DBManager db = new DBManager(DBManager.ConnectionString))
                 linguisticVars = db.GetLinguisticVariables(parameters);
 
             IList<ILinguisticVariable> linguisticVarsByParams = new List<ILinguisticVariable>();

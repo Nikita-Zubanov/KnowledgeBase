@@ -11,49 +11,50 @@ namespace KnowledgeBaseLibrary.FundamentalVariables
         OR
     }
 
+
     public class Antecedent
     {
-        private class JudgmentLine
+        class JudgmentLine
         {
-            LogicalConnection connection;
-            IList<Judgment> judgments;
+            public LogicalConnection Connection { get; private set; }
+            public IList<Judgment> Judgments { get; private set; }
 
             public JudgmentLine(LogicalConnection connection, IList<Judgment> judgments)
             {
-                this.connection = connection;
-                this.judgments = judgments;
+                this.Connection = connection;
+                this.Judgments = judgments;
             }
 
             public bool IsTrue(IList<Judgment> judgments)
             {
-                if (connection == LogicalConnection.AND)
-                    return judgments.Contains(this.judgments.First());
-                else if (connection == LogicalConnection.OR)
-                    return this.judgments.Any(j => judgments.Contains(j));
+                if (Connection == LogicalConnection.AND)
+                    return judgments.Contains(this.Judgments.First());
+                else if (Connection == LogicalConnection.OR)
+                    return this.Judgments.Any(j => judgments.Contains(j));
 
                 return false;
             }
             public bool IsCorrespondsButNotTrue(IList<Judgment> judgments)
             {
-                if (connection == LogicalConnection.AND)
-                    return judgments.Any(j => j.Title == this.judgments.First().Title);
-                else if (connection == LogicalConnection.OR)
-                    return this.judgments.Any(tj => judgments.Any(j => j.Title == tj.Title));
+                if (Connection == LogicalConnection.AND)
+                    return judgments.Any(j => j.Title == this.Judgments.First().Title);
+                else if (Connection == LogicalConnection.OR)
+                    return this.Judgments.Any(tj => judgments.Any(j => j.Title == tj.Title));
 
                 return false;
             }
 
             public bool Contains(Judgment judgment)
             {
-                return this.judgments.Contains(judgment);
+                return this.Judgments.Contains(judgment);
             }
 
             public override string ToString()
             {
                 string line = "";
 
-                foreach (Judgment judgment in judgments)
-                    line += String.Format("{0} {1} ", judgment, connection);
+                foreach (Judgment judgment in Judgments)
+                    line += String.Format("{0} {1} ", judgment, Connection);
                 line = line.TrimEnd(new char[] { 'O', 'R', 'A', 'N', 'D', ' ' });
 
                 return line;
@@ -61,6 +62,27 @@ namespace KnowledgeBaseLibrary.FundamentalVariables
         }
 
         private IList<JudgmentLine> antecedent = new List<JudgmentLine>();
+
+        public IDictionary<int, IList<Judgment>> JudgmentDictionary 
+        {
+            get
+            {
+                IDictionary<int , IList<Judgment>> pairs = new Dictionary<int, IList<Judgment>>();
+                int index = 0;
+
+                foreach (JudgmentLine line in antecedent)
+                {
+                    if (line.Connection == LogicalConnection.AND)
+                        pairs[index] = new List<Judgment> { line.Judgments.First() };
+                    else
+                        pairs[index] = line.Judgments;
+
+                    index++;
+                }
+
+                return pairs;
+            }
+        }
 
         public Antecedent AND(Judgment judgment)
         {

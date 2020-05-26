@@ -6,4 +6,3 @@ C:\Users\just-\source\repos\KnowledgeBaseLibrary\KnowledgeBaseLibrary\bin\Debug\
 C:\Users\just-\source\repos\KnowledgeBaseLibrary\KnowledgeBaseLibrary\obj\Debug\netstandard2.0\KnowledgeBaseLibrary.dll
 C:\Users\just-\source\repos\KnowledgeBaseLibrary\KnowledgeBaseLibrary\obj\Debug\netstandard2.0\KnowledgeBaseLibrary.pdb
 C:\Users\just-\source\repos\KnowledgeBaseLibrary\KnowledgeBaseLibrary\obj\Debug\netstandard2.0\KnowledgeBaseLibrary.csproj.CoreCompileInputs.cache
-C:\Users\just-\source\repos\KnowledgeBaseLibrary\KnowledgeBaseLibrary\obj\Debug\netstandard2.0\KnowledgeBaseLibrary.csprojAssemblyReference.cache

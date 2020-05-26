@@ -17,25 +17,21 @@ namespace KnowledgeBaseLibrary
     public class DBManager : IDisposable
     {
         private SqlConnection connection;
-        private const string connectionString = @"Data Source=(local);Initial Catalog=KnowledgeBaseDB;Integrated Security=True";
+        public static string ConnectionString;
 
-        public DBManager()
+        public DBManager(string connectionStr = @"Data Source=(local);Initial Catalog=KnowledgeBaseDB;Integrated Security=True")
         {
             try
             {
-                connection = new SqlConnection(connectionString);
-                connection.Open();
+                connection = new SqlConnection(connectionStr);
+                connection?.Open();
             }
             catch { }
         }
 
         public void Dispose()
         {
-            try
-            {
-                connection.Close();
-            }
-            catch { }
+            connection?.Close();
         }
 
         public IList<ILinguisticVariable> GetLinguisticVariables()
@@ -137,6 +133,46 @@ namespace KnowledgeBaseLibrary
             {
                 return GetStaticRules();
             }
+        }
+        public void DeleteRule(KB.Rule rule)
+        {
+            try
+            {
+                string commandString =
+                    "Delete Rules "+
+                    $"WHERE Antecedent = '{GetAntecedentJsonByRule(rule)}' " +
+                    $"AND Consequent = '{GetConsequentJsonByRule(rule)}'";
+                SqlCommand command = new SqlCommand(commandString, connection);
+                command.ExecuteNonQuery();
+
+            }
+            catch { }
+        }
+        public void UpdateRule(KB.Rule beforeRule, KB.Rule afterRule)
+        {
+            try
+            {
+                string commandString =
+                    "Update Rules " +
+                    $"Set Antecedent = '{GetAntecedentJsonByRule(afterRule)}', Consequent = '{GetConsequentJsonByRule(afterRule)}' " +
+                    $"Where Antecedent = '{GetAntecedentJsonByRule(beforeRule)}'";
+                SqlCommand command = new SqlCommand(commandString, connection);
+                command.ExecuteNonQuery();
+
+            }
+            catch { }
+        }
+        public void InsertRule(KB.Rule rule)
+        {
+            try
+            {
+                string commandString =
+                    "Insert Into Rules (Antecedent, Consequent)" +
+                    $"Values ('{GetAntecedentJsonByRule(rule)}', '{GetConsequentJsonByRule(rule)}')";
+                SqlCommand command = new SqlCommand(commandString, connection);
+                command.ExecuteNonQuery();
+            }
+            catch { }
         }
 
         public IList<FactorFuzzyValue> GetTermSets()
@@ -317,6 +353,46 @@ namespace KnowledgeBaseLibrary
         }
         #endregion
 
+        #region Methods for edit rules from a db
+        private string GetAntecedentJsonByRule(KB.Rule rule)
+        {
+            string json = "{ ";
+
+            foreach(IList<Judgment> judgments in rule.Antecedent.JudgmentDictionary.Values)
+            {
+                if (judgments.Count == 1)
+                {
+                    Judgment j = judgments.First();
+                    json += String.Format(@"""AND"": [ ""{0} — {1}"" ], ", j.Title, j.FuzzyValue);
+                }
+                else
+                {
+                    json += "\"OR\": [";
+                    foreach (Judgment j in judgments)
+                    {
+                        json += String.Format(@" ""{0} — {1}"",", j.Title, j.FuzzyValue);
+                    }
+                    json = json.TrimEnd(',');
+
+                    json += " ], ";
+                }
+            }
+            json = json.TrimEnd(new char[] { ' ', ',' });
+            json += " }";
+
+            return json;
+        }
+        private string GetConsequentJsonByRule(KB.Rule rule)
+        {
+            string json = "";
+            Judgment j = rule.Consequent;
+
+            json += String.Format(@"""{0} — {1}""", j.Title, j.FuzzyValue);
+
+            return json;
+        }
+        #endregion
+
         #region Methods for extracting termsets from a data table
         private IList<FactorFuzzyValue> GetTermSetsFromDataTable(DataTable dataTable)
         {
@@ -395,7 +471,9 @@ namespace KnowledgeBaseLibrary
                         words.Add(symbolWords[i].Replace(',', '.'));
                 }
 
+#pragma warning disable CS0162 // Обнаружен недостижимый код
                 for (int i = 0; i < words.Count; i++)
+#pragma warning restore CS0162 // Обнаружен недостижимый код
                 {
                     if (words[i] == attribute)
                     {
@@ -579,7 +657,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.dt, FactorFuzzyValue.Successful), new Judgment(FactorTitle.dt, FactorFuzzyValue.Unsuccessful));
             consequent = new Judgment(FactorTitle.ServiceabilityEquipment, FactorFuzzyValue.Exceeding);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.ServiceabilityEquipment,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Исправность технического состояния оборудования",
+                    null
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule02()
         {
@@ -596,7 +681,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.dt, FactorFuzzyValue.Successful), new Judgment(FactorTitle.dt, FactorFuzzyValue.Unsuccessful));
             consequent = new Judgment(FactorTitle.ServiceabilityEquipment, FactorFuzzyValue.Maximum);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.ServiceabilityEquipment,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Исправность технического состояния оборудования",
+                    null
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule03()
         {
@@ -612,7 +704,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.dt, FactorFuzzyValue.Successful));
             consequent = new Judgment(FactorTitle.ServiceabilityEquipment, FactorFuzzyValue.Nominal);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.ServiceabilityEquipment,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Исправность технического состояния оборудования",
+                    null
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         #endregion
 
@@ -627,13 +726,22 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.Weather, FactorFuzzyValue.Unsuccessful));
             consequent = new Judgment(FactorTitle.Uimp, FactorFuzzyValue.Exceeding);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uimp,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Грозовые импульсные напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule12()
         {
             Antecedent antecedent;
             Judgment consequent;
+#pragma warning disable CS0168 // Переменная "other" объявлена, но ни разу не использована.
             Judgment other;
+#pragma warning restore CS0168 // Переменная "other" объявлена, но ни разу не использована.
 
             antecedent = new Antecedent()
                 .OR(new Judgment(FactorTitle.Ua, FactorFuzzyValue.Maximum), new Judgment(FactorTitle.Ub, FactorFuzzyValue.Maximum), new Judgment(FactorTitle.Uc, FactorFuzzyValue.Maximum))
@@ -643,7 +751,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.Weather, FactorFuzzyValue.Unsuccessful));
             consequent = new Judgment(FactorTitle.Uimp, FactorFuzzyValue.Maximum);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uimp,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Грозовые импульсные напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule13()
         {
@@ -657,7 +772,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.Weather, FactorFuzzyValue.Unsuccessful));
             consequent = new Judgment(FactorTitle.Uimp, FactorFuzzyValue.Nominal);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uimp,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Грозовые импульсные напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule14()
         {
@@ -668,7 +790,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.Weather, FactorFuzzyValue.Successful));
             consequent = new Judgment(FactorTitle.Uimp, FactorFuzzyValue.Nominal);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uimp,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Грозовые импульсные напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         #endregion
 
@@ -682,7 +811,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.Ua, FactorFuzzyValue.Exceeding), new Judgment(FactorTitle.Ub, FactorFuzzyValue.Exceeding), new Judgment(FactorTitle.Uc, FactorFuzzyValue.Exceeding));
             consequent = new Judgment(FactorTitle.dUabc, FactorFuzzyValue.Exceeding);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.dUabc,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Отклонение напряжения по фазам А, В, С",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule22()
         {
@@ -696,7 +832,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.Uc, FactorFuzzyValue.Maximum), new Judgment(FactorTitle.Ua, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.dUabc, FactorFuzzyValue.Maximum);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.dUabc,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Отклонение напряжения по фазам А, В, С",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule23()
         {
@@ -709,7 +852,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.Uc, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.dUabc, FactorFuzzyValue.Nominal);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.dUabc,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Отклонение напряжения по фазам А, В, С",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         #endregion
 
@@ -723,7 +873,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.Ua, FactorFuzzyValue.Exceeding), new Judgment(FactorTitle.Ub, FactorFuzzyValue.Exceeding), new Judgment(FactorTitle.Uc, FactorFuzzyValue.Exceeding));
             consequent = new Judgment(FactorTitle.KU, FactorFuzzyValue.Exceeding);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.KU,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Коэффициент искажения синусоидальности кривой напряжения",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule32()
         {
@@ -737,7 +894,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.Uc, FactorFuzzyValue.Maximum), new Judgment(FactorTitle.Ua, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.KU, FactorFuzzyValue.Maximum);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.KU,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Коэффициент искажения синусоидальности кривой напряжения",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule33()
         {
@@ -750,7 +914,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.Uc, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.KU, FactorFuzzyValue.Nominal);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.KU,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Коэффициент искажения синусоидальности кривой напряжения",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         #endregion
 
@@ -764,7 +935,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.K2U, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.K2Ui, FactorFuzzyValue.Successful);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.K2Ui,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Unsuccessful, FactorFuzzyValue.Successful },
+                    "Несимметрия напряжений",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule42()
         {
@@ -775,7 +953,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.K2U, FactorFuzzyValue.Exceeding), new Judgment(FactorTitle.K2U, FactorFuzzyValue.Maximum));
             consequent = new Judgment(FactorTitle.K2Ui, FactorFuzzyValue.Unsuccessful);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.K2Ui,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Unsuccessful, FactorFuzzyValue.Successful },
+                    "Несимметрия напряжений",
+                    "%"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         #endregion
 
@@ -789,7 +974,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.KU, FactorFuzzyValue.Exceeding), new Judgment(FactorTitle.KUn, FactorFuzzyValue.Exceeding));
             consequent = new Judgment(FactorTitle.Uns, FactorFuzzyValue.Exceeding);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uns,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Несинусоидальность напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule52()
         {
@@ -802,7 +994,14 @@ namespace KnowledgeBaseLibrary
                 .OR(new Judgment(FactorTitle.KUn, FactorFuzzyValue.Maximum), new Judgment(FactorTitle.KUn, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.Uns, FactorFuzzyValue.Maximum);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uns,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Несинусоидальность напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         private KB.Rule GetRule53()
         {
@@ -814,7 +1013,14 @@ namespace KnowledgeBaseLibrary
                 .AND(new Judgment(FactorTitle.KUn, FactorFuzzyValue.Nominal));
             consequent = new Judgment(FactorTitle.Uns, FactorFuzzyValue.Nominal);
 
-            return new SimpleRule(linguisticVariable, antecedent, consequent);
+            LinguisticVariable linguistic = new LinguisticVariable(
+                    FactorTitle.Uns,
+                    null,
+                    new List<FactorFuzzyValue> { FactorFuzzyValue.Nominal, FactorFuzzyValue.Maximum, FactorFuzzyValue.Exceeding },
+                    "Несинусоидальность напряжения",
+                    "В"
+                    );
+            return new SimpleRule(linguistic, antecedent, consequent);
         }
         #endregion
 
@@ -829,7 +1035,7 @@ namespace KnowledgeBaseLibrary
                 FactorFuzzyValue.Maximum,
                 FactorFuzzyValue.Exceeding
             };
-            #endregion
         }
+        #endregion
     }
 }

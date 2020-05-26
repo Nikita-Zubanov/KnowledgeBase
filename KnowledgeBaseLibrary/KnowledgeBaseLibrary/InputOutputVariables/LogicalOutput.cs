@@ -65,7 +65,7 @@ namespace KnowledgeBaseLibrary.InputOutputVariables
 
         public LogicalOutput()
         {
-            using (DBManager db = new DBManager())
+            using (DBManager db = new DBManager(DBManager.ConnectionString))
             {
                 allLinguisticVariables = db.GetLinguisticVariables();
             }
@@ -103,7 +103,7 @@ namespace KnowledgeBaseLibrary.InputOutputVariables
             LinguisticVariablesOutput[iteration].Add(linguisticVar);
         }
 
-        public bool HaveConsequent(KB.Rule rule)
+        public bool HaveConsequent(Rule rule)
         {
             return allFactors.Contains(rule.Consequent);
         }

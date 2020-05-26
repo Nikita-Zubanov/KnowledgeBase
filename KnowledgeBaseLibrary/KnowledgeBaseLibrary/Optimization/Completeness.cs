@@ -7,16 +7,16 @@ namespace KnowledgeBaseLibrary.Optimization
 {
     internal class Completeness : IVerification, ITransformer
     {
-        public void Transform(ref IList<KB.Rule> rules)
+        public void Transform(ref IList<Rule> rules)
         {
-            IList<KB.Rule> treeRules = GetTopRules(rules);
+            IList<Rule> treeRules = GetTopRules(rules);
 
             MakeTreeRules(rules, treeRules);
 
             rules = treeRules;
         }
 
-        public bool IsVerified(IList<KB.Rule> rules)
+        public bool IsVerified(IList<Rule> rules)
         {
             if (rules != null)
             {
@@ -29,13 +29,13 @@ namespace KnowledgeBaseLibrary.Optimization
                 throw new NullReferenceException();
         }
 
-        private void MakeTreeRules(IList<KB.Rule> baseRules, IList<KB.Rule> rulesTree)
+        private void MakeTreeRules(IList<Rule> baseRules, IList<Rule> rulesTree)
         {
-            foreach (KB.Rule ruleOfTree in rulesTree)
+            foreach (Rule ruleOfTree in rulesTree)
             {
                 bool isAdded = false;
 
-                foreach (KB.Rule baseRule in baseRules)
+                foreach (Rule baseRule in baseRules)
                 {
                     if (ruleOfTree.Antecedent.Contains(baseRule.Consequent))
                     {
@@ -50,15 +50,15 @@ namespace KnowledgeBaseLibrary.Optimization
             }
         }
 
-        private IList<KB.Rule> GetTopRules(IList<KB.Rule> baseRules)
+        private IList<Rule> GetTopRules(IList<Rule> baseRules)
         {
-            IList<KB.Rule> topRules = new List<KB.Rule>();
+            IList<Rule> topRules = new List<Rule>();
 
-            foreach (KB.Rule currentRule in baseRules)
+            foreach (Rule currentRule in baseRules)
             {
                 bool isTopRule = true;
 
-                foreach (KB.Rule rule in baseRules)
+                foreach (Rule rule in baseRules)
                     if (rule.Antecedent.Contains(currentRule.Consequent))
                     {
                         isTopRule = false;
@@ -67,7 +67,7 @@ namespace KnowledgeBaseLibrary.Optimization
 
                 if (isTopRule)
                 {
-                    KB.Rule topRule = new CompoundRule(currentRule.LinguisticVariable, currentRule.Antecedent, currentRule.Consequent);
+                    Rule topRule = new CompoundRule(currentRule.LinguisticVariable, currentRule.Antecedent, currentRule.Consequent);
                     topRules.Add(topRule);
                 }
             }

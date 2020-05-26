@@ -7,6 +7,6 @@ namespace KnowledgeBaseLibrary.Optimization
 {
     internal interface ITransformer
     {
-        void Transform(ref IList<KB.Rule> rules);
+        void Transform(ref IList<Rule> rules);
     }
 }

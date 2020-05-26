@@ -5,7 +5,9 @@ using System.Text;
 
 namespace KnowledgeBaseLibrary.RuleVariables
 {
+#pragma warning disable CS0659 // '"Rule" переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode().
     public abstract class Rule
+#pragma warning restore CS0659 // '"Rule" переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode().
     {
         public LinguisticVariable LinguisticVariable { get; private set; }
         public Antecedent Antecedent { get; private set; }
@@ -38,8 +40,8 @@ namespace KnowledgeBaseLibrary.RuleVariables
                 else
                     return false;
             }
-            else
-                throw new NullReferenceException();
+
+            return false;
         }
 
         public override string ToString()

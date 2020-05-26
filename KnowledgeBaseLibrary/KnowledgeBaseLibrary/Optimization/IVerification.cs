@@ -7,6 +7,6 @@ namespace KnowledgeBaseLibrary.Optimization
 {
     internal interface IVerification
     {
-        bool IsVerified(IList<KB.Rule> rules);
+        bool IsVerified(IList<Rule> rules);
     }
 }

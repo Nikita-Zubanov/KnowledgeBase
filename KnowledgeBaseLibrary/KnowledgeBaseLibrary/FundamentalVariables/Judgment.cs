@@ -4,7 +4,9 @@ using System.Text;
 
 namespace KnowledgeBaseLibrary.FundamentalVariables
 {
+#pragma warning disable CS0659 // '"Judgment" переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode().
     public class Judgment
+#pragma warning restore CS0659 // '"Judgment" переопределяет Object.Equals(object o), но не переопределяет Object.GetHashCode().
     {
         public FactorTitle Title { get; private set; }
         public FactorFuzzyValue FuzzyValue { get; private set; }

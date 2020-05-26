@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\just-\\OneDrive\\Рабочий стол\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj": {}
+    "C:\\Users\\just-\\source\\repos\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\just-\\OneDrive\\Рабочий стол\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj": {
+    "C:\\Users\\just-\\source\\repos\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\just-\\OneDrive\\Рабочий стол\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\just-\\source\\repos\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj",
         "projectName": "KnowledgeBaseLibrary",
-        "projectPath": "C:\\Users\\just-\\OneDrive\\Рабочий стол\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj",
+        "projectPath": "C:\\Users\\just-\\source\\repos\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary.csproj",
         "packagesPath": "C:\\Users\\just-\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\just-\\OneDrive\\Рабочий стол\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\obj\\",
+        "outputPath": "C:\\Users\\just-\\source\\repos\\KnowledgeBaseLibrary\\KnowledgeBaseLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\just-\\AppData\\Roaming\\NuGet\\NuGet.Config",
