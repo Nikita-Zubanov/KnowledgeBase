@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="Изменение правил в базы знаний" Height="450" Width="600">
+        Title="Изменение правил в базы знаний" MinHeight="450" Height="450" MinWidth="600" Width="600">
     <Grid>
         <ComboBox ItemsSource="{Binding Rules}" SelectedItem="{Binding  SelectedRule}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="572"/>
         <Label Content="ЕСЛИ" Margin="10,37,0,0" HorizontalAlignment="Left" Width="50" Height="26" VerticalAlignment="Top" RenderTransformOrigin="0.432,1.408"/>

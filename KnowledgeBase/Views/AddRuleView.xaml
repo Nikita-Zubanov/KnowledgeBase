@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="Добавить правило в базу знаний" Height="450" Width="600">
+        Title="Добавить правило в базу знаний" MinHeight="450" Height="450" MinWidth="600" Width="600">
     <Grid>
         <Label Content="ЕСЛИ" Margin="10,10,0,0" HorizontalAlignment="Left" Width="50" Height="26" VerticalAlignment="Top"/>
         <ListView ItemsSource="{Binding AntecedentM.Judgments, Mode=TwoWay}" Margin="10,36,10,72">

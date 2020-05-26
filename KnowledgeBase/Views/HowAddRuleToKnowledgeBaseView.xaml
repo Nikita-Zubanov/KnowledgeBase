@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="Как добавить правило в базу знаний?" MinHeight="750" Height="750" MinWidth="600" Width="600">
+        Title="Как добавить правило в базу знаний?" MinHeight="600" Height="600" MinWidth="600" Width="600">
     <Grid>
         <TextBlock Text="{Binding Text}" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="auto" Width="572"/>
     </Grid>

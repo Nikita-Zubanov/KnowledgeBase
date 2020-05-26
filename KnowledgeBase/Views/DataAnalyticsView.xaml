@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase.Views"
         mc:Ignorable="d"
-        Title="Графическое отображение показаний приборов" Height="450" Width="600">
+        Title="Графическое отображение показаний приборов" MinHeight="450" Height="450" MinWidth="600" Width="600">
     <Grid>
         <StackPanel Margin="10,10,10,0">
             <TextBlock Text="Показания входных данных:" Margin="0,0,0,10" />
