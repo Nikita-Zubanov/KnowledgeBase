@@ -35,8 +35,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.1\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,19 +86,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\AddParameterWindow.xaml">
+    <Compile Include="Models\AntecedentM.cs" />
+    <Compile Include="Models\ConsequentM.cs" />
+    <Compile Include="Models\JudgmentM.cs" />
+    <Compile Include="Models\RuleM.cs" />
+    <Compile Include="ViewModel\AddRuleViewModel.cs" />
+    <Compile Include="ViewModel\DataAnalyticsViewModel.cs" />
+    <Compile Include="ViewModel\EditRuleViewModel.cs" />
+    <Compile Include="ViewModel\LogicalOutputViewModel.cs" />
+    <Compile Include="ViewModel\ReasoningViewModel.cs" />
+    <Compile Include="Views\DataAnalyticsView.xaml.cs">
+      <DependentUpon>DataAnalyticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GlobalDBConnectionBaseView.xaml.cs">
+      <DependentUpon>GlobalDBConnectionBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowAddRuleToKnowledgeBaseView.xaml.cs">
+      <DependentUpon>HowAddRuleToKnowledgeBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowConnectToDatabase.xaml.cs">
+      <DependentUpon>HowConnectToDatabase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowDiagnoseView.xaml.cs">
+      <DependentUpon>HowDiagnoseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HowEditKnowledgeBaseView.xaml.cs">
+      <DependentUpon>HowEditKnowledgeBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LogicalOutputView.xaml.cs">
+      <DependentUpon>LogicalOutputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReasoningView.xaml.cs">
+      <DependentUpon>ReasoningView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AddRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddRuleWindow.xaml">
+    <Page Include="Views\DataAnalyticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DeleteRuleWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditRuleWindow.xaml">
+    <Page Include="Views\EditRuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,29 +135,53 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Views\AddParameterWindow.xaml.cs">
-      <DependentUpon>AddParameterWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddRuleWindow.xaml.cs">
-      <DependentUpon>AddRuleWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Command.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\DeleteRuleWindow.xaml.cs">
-      <DependentUpon>DeleteRuleWindow.xaml</DependentUpon>
+    <Compile Include="Views\AddRuleView.xaml.cs">
+      <DependentUpon>AddRuleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditRuleWindow.xaml.cs">
-      <DependentUpon>EditRuleWindow.xaml</DependentUpon>
+    <Compile Include="Views\EditRuleView.xaml.cs">
+      <DependentUpon>EditRuleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\GlobalDBConnectionBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowAddRuleToKnowledgeBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowConnectToDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowDiagnoseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HowEditKnowledgeBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LogicalOutputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReasoningView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parameter.cs" />
+    <Compile Include="Models\ParameterM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,6 +199,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,6 +207,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\KnowledgeBaseLibrary\KnowledgeBaseLibrary\KnowledgeBaseLibrary.csproj">
+      <Project>{ae615fdf-7217-4999-97ce-da9fb8b88079}</Project>
+      <Name>KnowledgeBaseLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

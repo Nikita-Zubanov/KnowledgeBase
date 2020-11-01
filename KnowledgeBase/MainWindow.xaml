@@ -5,5 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KnowledgeBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="600">
+        Title="Диагностика промышленного оборудования" MinHeight="300" Height="300" MinWidth="650" Width="650">
+
+    <Grid>  
+        <Menu x:Name="MainMenu" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top">
+            <MenuItem Header="Редактировать">
+                <MenuItem Command="{Binding RouteCommand}" CommandParameter="AddRuleView" Header="Добавить правило" />
+                <MenuItem Command="{Binding RouteCommand}" CommandParameter="EditRuleView" Header="Изменить/удалить правило" />
+            </MenuItem>
+            <MenuItem Header="Помощь">
+                <MenuItem Command="{Binding RouteCommand}" CommandParameter="HowDiagnoseView" Header="Как диагностировать?"/>
+                <MenuItem Command="{Binding RouteCommand}" CommandParameter="HowAddRuleToKnowledgeBaseView" Header="Как добавить правило в БЗ?"/>
+                <MenuItem Command="{Binding RouteCommand}" CommandParameter="HowEditKnowledgeBaseView" Header="Как редактировать БЗ?"/>
+                <MenuItem Command="{Binding RouteCommand}" CommandParameter="HowConnectToDatabase" Header="Как подключиться к БД?"/>
+            </MenuItem>
+            <MenuItem Command="{Binding RouteCommand}" CommandParameter="GlobalDBConnectionBaseView" Header="Подключиться к БД"/>
+        </Menu>
+        
+        <ListView ItemsSource="{Binding Parameters}" Margin="10,30,10,42">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Description}" HorizontalAlignment="Left" Width="auto"/>
+                        <TextBlock Text=" (" />
+                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Width="auto"/>
+                        <TextBlock Text=")" />
+                        <TextBlock Text=":  " />
+                        <TextBox Text="{Binding ValueString, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="100" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Unit}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Command="{Binding DiagnoseCommand}" CommandParameter="{Binding Parameters}" Content="Диагностировать" HorizontalAlignment="Right" Margin="0,0,10,10" Width="120" Height="20" VerticalAlignment="Bottom"/>
+    </Grid>
 </Window>

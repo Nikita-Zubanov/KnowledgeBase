@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnowledgeBase.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AddRuleWindow.xaml
+    /// Логика взаимодействия для ReasoningView.xaml
     /// </summary>
-    public partial class AddRuleWindow : Window
+    public partial class ReasoningView : Window
     {
-        public AddRuleWindow()
+        public ReasoningView(ReasoningViewModel reasoningVM)
         {
             InitializeComponent();
+            DataContext = reasoningVM;
         }
     }
 }

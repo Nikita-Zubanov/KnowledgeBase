@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnowledgeBase.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,14 @@ using System.Windows.Shapes;
 namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AddParameterWindow.xaml
+    /// Логика взаимодействия для LogicalOutputView.xaml
     /// </summary>
-    public partial class AddParameterWindow : Window
+    public partial class LogicalOutputView : Window
     {
-        public AddParameterWindow()
+        public LogicalOutputView(LogicalOutputViewModel logicalOutputVM)
         {
             InitializeComponent();
+            DataContext = logicalOutputVM;
         }
     }
 }

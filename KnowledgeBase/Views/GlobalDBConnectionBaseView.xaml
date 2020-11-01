@@ -1,0 +1,14 @@
+﻿<Window x:Class="KnowledgeBase.Views.GlobalDBConnectionBaseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KnowledgeBase.Views"
+        mc:Ignorable="d"
+        Title="Подключение к базе данных" MinHeight="140" Height="140" MinWidth="425" Width="425">
+    <Grid>
+        <TextBox Text="{Binding Path=ConnectionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="54" Margin="148,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+        <Label Content="Строка подключения: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button Command="{Binding ConnectCommand}" Content="Подключиться" HorizontalAlignment="Left" Margin="298,69,0,0" VerticalAlignment="Top" Width="100"/>
+    </Grid>
+</Window>

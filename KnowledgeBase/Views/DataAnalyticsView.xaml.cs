@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnowledgeBase.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditRuleWindow.xaml
+    /// Логика взаимодействия для DataAnalyticsView.xaml
     /// </summary>
-    public partial class EditRuleWindow : Window
+    public partial class DataAnalyticsView : Window
     {
-        public EditRuleWindow()
+        public DataAnalyticsView(DataAnalyticsViewModel dataAnalyticsVM)
         {
             InitializeComponent();
+            DataContext = dataAnalyticsVM;
         }
     }
 }

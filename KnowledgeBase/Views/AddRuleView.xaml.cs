@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnowledgeBase.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KnowledgeBase
+namespace KnowledgeBase.Views
 {
     /// <summary>
-    /// Логика взаимодействия для DeleteRuleWindow.xaml
+    /// Логика взаимодействия для AddRuleView.xaml
     /// </summary>
-    public partial class DeleteRuleWindow : Window
+    public partial class AddRuleView : Window
     {
-        public DeleteRuleWindow()
+        public AddRuleView()
         {
             InitializeComponent();
+            DataContext = new AddRuleViewModel();
         }
     }
 }
